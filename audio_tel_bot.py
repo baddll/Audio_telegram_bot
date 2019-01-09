@@ -68,9 +68,8 @@ def sandler(message):
             else:
                 print('omg')
 
-def groups_list(aaa, bbb):#inline group list
-    a = aaa
-    b = bbb
+def groups_list(a, b):#inline group list
+    
     d = 0
 
     keyboard = types.InlineKeyboardMarkup()
@@ -82,7 +81,7 @@ def groups_list(aaa, bbb):#inline group list
                                                    callback_data=str(artists_inline_list()[1][a]).lower() + '***group'))
             a += 1
     except:
-        c = bbb - artists_inline_list()[2]
+        c = b - artists_inline_list()[2]
         while d <= c:
             btns.append(types.InlineKeyboardButton(text=' ',
                                                    callback_data='ignore'))
