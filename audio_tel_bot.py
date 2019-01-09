@@ -478,7 +478,7 @@ def nexter(message):
         bot.send_message(message.chat.id, text='Что-то пошло не так. Попробуй еще раз.')
 
 @bot.message_handler(content_types=['audio'])
-def audio(message):
+def audio(message):#Добавление треков в БД
     if closer(message.chat.id) == None:
         pass
     else:
