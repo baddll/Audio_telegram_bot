@@ -23,18 +23,21 @@ album_dict = {}
 @bot.message_handler(commands={'start', 'help'})
 def start(message):
     try:
-        if closer(message.chat.id) == None:
+        
+        if closer(message.chat.id) == None:#обращение к функции, которая закрывает доступ левым польщователям.
+            #Для предоставления доступа необходимо в таблицу внести ID.
             pass
         else:
             con = sqlite3.connect('mp3_base.db')
             cur = con.cursor()
             cur.execute('SELECT * FROM users WHERE Id=:Id', {'Id': message.chat.id})
-
+            
+            #создание клавиатуры с командой /list
             keyboard = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=False)
             callback_button = types.InlineKeyboardButton(text="/list")
             keyboard.add(callback_button)
             bot.send_message(message.chat.id, 'Чтобы увидеть весь список исполнителей, нажми на кнопку ниже:',
-                             reply_markup=keyboard)
+                             reply_markup=keyboard)#отправка сообщения после команды /start и открытие клавиатуры с кнопкой /list
     except:
         print('error 1: def start - basic_bot_file.')
 
@@ -70,6 +73,9 @@ def sandler(message):
 
 def groups_list(a, b):#inline group list
     
+    #а - порядковый номер исполнителя с которого начинается построение списка
+    #b - порядковый номер исполнителя в конце списка а + 32
+    
     d = 0
 
     keyboard = types.InlineKeyboardMarkup()
@@ -81,6 +87,7 @@ def groups_list(a, b):#inline group list
                                                    callback_data=str(artists_inline_list()[1][a]).lower() + '***group'))
             a += 1
     except:
+        #если в списке меньше 32 исполнителей, то срабатывает исключение и список будет доставлен пустыми блоками.
         c = b - artists_inline_list()[2]
         while d <= c:
             btns.append(types.InlineKeyboardButton(text=' ',
