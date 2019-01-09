@@ -38,7 +38,7 @@ def start(message):
     except:
         print('error 1: def start - basic_bot_file.')
 
-@bot.message_handler(commands={None})#--------------------------------enter on keyboard
+@bot.message_handler(commands={None})#enter on keyboard
 def sandler(message):
 
     if closer(message.chat.id) == None:
@@ -68,7 +68,7 @@ def sandler(message):
             else:
                 print('omg')
 
-def groups_list(aaa, bbb):#-------------------------inline group list
+def groups_list(aaa, bbb):#inline group list
     a = aaa
     b = bbb
     d = 0
@@ -92,7 +92,7 @@ def groups_list(aaa, bbb):#-------------------------inline group list
     keyboard.add(*btns)
     return keyboard
 
-def album_list(art):#-----------albums list
+def album_list(art):#albums list
     btns = []
     keyboard = types.InlineKeyboardMarkup()
 
@@ -135,7 +135,7 @@ def album_list(art):#-----------albums list
         print('error 4: def album_list - basic_bot_file.')
     return keyboard
 
-@bot.message_handler(commands={'list'})#-------------------------------group list + remote buttons
+@bot.message_handler(commands={'list'})#group list + remote buttons
 def list(message):
 
     if closer(message.chat.id) == None:
@@ -156,7 +156,7 @@ def list(message):
         keyboard.add(*btns)
         bot.send_message(message.chat.id, "Список исполнителей: ", reply_markup=keyboard, parse_mode='Markdown')
 
-@bot.callback_query_handler(func=lambda call: call.data == 'next')#------------------------inline for next-button
+@bot.callback_query_handler(func=lambda call: call.data == 'next')#inline for next-button
 def callback_inline_next(call):
     ID = call.message.chat.id
     saver = users_dict.get(ID)
@@ -189,7 +189,7 @@ def callback_inline_next(call):
     except:
         print('error 5: def callback_inline - basic_bot_file.')
 
-@bot.callback_query_handler(func=lambda call: call.data == 'back')#------------------------inline for back-button
+@bot.callback_query_handler(func=lambda call: call.data == 'back')#inline for back-button
 def callback_inline_back(call):
     ID = call.message.chat.id
 
@@ -223,7 +223,7 @@ def callback_inline_back(call):
     except:
         print('error 6: def callback_inline_back - basic_bot_file.')
 
-@bot.callback_query_handler(func=lambda mes: True)#-----------------обработчик всех команд + выбор альбома
+@bot.callback_query_handler(func=lambda mes: True)#обработчик всех команд + выбор альбома
 def callback_inline(mes):
     if closer(mes.message.chat.id) == None:
         pass
@@ -438,7 +438,7 @@ def callback_inline(mes):
         else:
             pass
 
-@bot.message_handler(commands=['next'])#----------------------buttons for next 5 songs from for_send table
+@bot.message_handler(commands=['next'])#buttons for next 5 songs from for_send table
 def nexter(message):
     try:
         keyboard1 = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=False)
